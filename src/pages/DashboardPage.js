@@ -39,7 +39,7 @@ function DashboardPage() {
         <Stack direction="column">
           <Stack direction="column">
             <Stack
-              sx={{ marginTop: "1%", marginLeft: "0%", width: "100%" }}
+              sx={{ marginTop: "1%", marginLeft: "0%", width: "200%" }}
               direction="row"
               spacing={2}
             >

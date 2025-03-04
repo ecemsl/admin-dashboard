@@ -1,9 +1,26 @@
 import React, { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { Card, CardContent, FormControl, InputLabel, Select, MenuItem, Typography } from "@mui/material";
-import { fetchData, filterDataByPeriod } from '../DataFetcher';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import {
+  Card,
+  CardContent,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Typography,
+} from "@mui/material";
+import { fetchData, filterDataByPeriod } from "../DataFetcher";
 
 export default function LineChartComp() {
   const [period, setPeriod] = useState(7);
@@ -12,7 +29,7 @@ export default function LineChartComp() {
   useEffect(() => {
     const initialData = fetchData();
     const filteredData = filterDataByPeriod(initialData, period);
-    const data = filteredData.map(item => ({
+    const data = filteredData.map((item) => ({
       date: item.TARIH,
       verifiedAlarm: item.VERIFIED_ALARM_COUNT,
       enabledAlarm: item.ENABLED_ALARM_COUNT,
@@ -42,54 +59,68 @@ export default function LineChartComp() {
             <MenuItem value={90}>Last 90 Days</MenuItem>
           </Select>
         </FormControl>
-        <Stack direction="column" sx={{ width: "100%", paddingTop: "1%" }} spacing={4}>
+        <Stack
+          direction="column"
+          sx={{ width: "100%", paddingTop: "1%" }}
+          spacing={4}
+        >
           <Box sx={{ flexGrow: 1 }}>
             <Typography variant="h6">Alarm Counts Over Time</Typography>
-            <LineChart
-              width={1100}
-              height={300}
-              data={chartData}
-              margin={{ top: 20, right: 10, left: 0, bottom: 5 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line type="monotone" dataKey="alarm" stroke="#b800d8" />
-            </LineChart>
+            <ResponsiveContainer width="97%" height={300}>
+              <LineChart
+                data={chartData}
+                margin={{ top: 20, right: 10, left: 0, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="alarm" stroke="#b800d8" />
+              </LineChart>
+            </ResponsiveContainer>
           </Box>
           <Box sx={{ flexGrow: 1 }}>
             <Typography variant="h6">Enabled Alarm Counts Over Time</Typography>
-            <LineChart
-              width={1100}
-              height={300}
-              data={chartData}
-              margin={{ top: 20, right: 10, left: 0, bottom: 5 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line type="monotone" dataKey="enabledAlarm" stroke="#2d96ff" />
-            </LineChart>
+            <ResponsiveContainer width="97%" height={300}>
+              <LineChart
+                width={1100}
+                height={300}
+                data={chartData}
+                margin={{ top: 20, right: 10, left: 0, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="enabledAlarm" stroke="#2d96ff" />
+              </LineChart>
+            </ResponsiveContainer>
           </Box>
           <Box sx={{ flexGrow: 1 }}>
-            <Typography variant="h6">Verified Alarm Counts Over Time</Typography>
-            <LineChart
-              width={1100}
-              height={300}
-              data={chartData}
-              margin={{ top: 20, right: 10, left: 0, bottom: 5 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line type="monotone" dataKey="verifiedAlarm" stroke="#06b1af" />
-            </LineChart>
+            <Typography variant="h6">
+              Verified Alarm Counts Over Time
+            </Typography>
+            <ResponsiveContainer width="97%" height={300}>
+              <LineChart
+                width={1100}
+                height={300}
+                data={chartData}
+                margin={{ top: 20, right: 10, left: 0, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="verifiedAlarm"
+                  stroke="#06b1af"
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </Box>
         </Stack>
       </CardContent>

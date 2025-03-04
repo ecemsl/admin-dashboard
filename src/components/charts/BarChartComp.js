@@ -57,7 +57,7 @@ function BarChartComp({ onPeriodChange }) {
               xAxis={[{ scaleType: "band", data: chartData.xAxis }]}
               yAxis={[{ min: 0 }]}
               series={chartData.series}
-              width={period === 90 ? 1150 : 630}
+              width={period === 90 ? 1200 : 650}
               height={300}
             />
           </Stack>
